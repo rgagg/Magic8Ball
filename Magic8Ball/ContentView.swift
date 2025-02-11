@@ -35,44 +35,50 @@ struct ContentView: View {
     "Very doubtful"]
   
   var body: some View {
-    VStack {
-      Spacer()
+    ZStack {
+      Color.white
+        .ignoresSafeArea()
       
-      Image("predict-ball-image")
-        .resizable()
-        .scaledToFit()
-        .frame(width: 350, height: 350)
-      
-      Text(predictMessage)
-        .font(.largeTitle)
-        .multilineTextAlignment(.center)
-        .minimumScaleFactor(0.5)
-        .frame(height: 120)
-        .animation(
-          .easeInOut(duration: 0.5)
-          .delay(0.25),
-          value: predictMessage
-        )
-      Spacer()
-      
-      Button {
+      VStack {
+        Spacer()
         
-        repeat {
-          newMessageIndex = Int.random(in: 0...choicesArray.count - 1)
-        } while lastMessageIndex == newMessageIndex
+        Image("predict-ball-image")
+          .resizable()
+          .scaledToFit()
+          .frame(width: 350, height: 350)
         
-        predictMessage = (choicesArray[newMessageIndex])
-        lastMessageIndex = newMessageIndex
+        Text(predictMessage)
+          .font(.largeTitle)
+          .foregroundStyle(.black)
+          .multilineTextAlignment(.center)
+          .minimumScaleFactor(0.5)
+          .frame(height: 120)
+          .animation(
+            .easeInOut(duration: 0.5)
+            .delay(0.25),
+            value: predictMessage
+          )
+        Spacer()
         
-      } label: {
-        Text("Hit Me!")
-          .font(.title2)
+        Button {
+          
+          repeat {
+            newMessageIndex = Int.random(in: 0...choicesArray.count - 1)
+          } while lastMessageIndex == newMessageIndex
+          
+          predictMessage = (choicesArray[newMessageIndex])
+          lastMessageIndex = newMessageIndex
+          
+        } label: {
+          Text("Hit Me!")
+            .font(.title2)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(.indigo)
+        
       }
-      .buttonStyle(.borderedProminent)
-      .tint(.indigo)
-      
+      .padding()
     }
-    .padding()
   }
 }
 
